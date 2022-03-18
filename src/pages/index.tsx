@@ -8,7 +8,7 @@ const Index = () => {
 
   return (
     <div className="flex flex-col justify-center items-center pr-36 w-full min-h-screen bg-blue-100">
-      <Suspense fallback={null}>
+      <Suspense fallback={<h1>Loading object</h1>}>
         <Canvas
           style={{
             width: "100vw",
