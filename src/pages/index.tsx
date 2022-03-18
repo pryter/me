@@ -20,7 +20,7 @@ const Index = () => {
   }, [])
 
   return (
-    <div className="flex flex-col justify-center items-center pr-32 w-full min-h-screen bg-blue-100">
+    <div className="flex fixed flex-col justify-center items-center pr-32 w-full min-h-screen bg-blue-100">
       {gltf === null ? (
         "Loading"
       ) : (

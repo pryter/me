@@ -4,6 +4,11 @@ a {
   @apply text-blue-700;
 }
 
+body {
+  touch-action: none;
+
+}
+
 a:hover {
   @apply border-b-2 border-blue-700;
 }
