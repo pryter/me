@@ -1,14 +1,29 @@
-import { Suspense } from "react"
+import { useEffect, useState } from "react"
 
-import { PresentationControls, useGLTF, Text } from "@react-three/drei"
+import { PresentationControls, Text } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
 const Index = () => {
-  const gltf = useGLTF("https://pryter.me/assets/models/myfirstTree.glb")
+  const [gltf, setObj] = useState<any>(null)
+
+  useEffect(() => {
+    const load = async () => {
+      const loader = new GLTFLoader()
+      const ob = await loader.loadAsync(
+        "https://pryter.me/assets/models/myfirstTree.glb"
+      )
+      setObj(ob)
+    }
+
+    load()
+  }, [])
 
   return (
     <div className="flex flex-col justify-center items-center pr-36 w-full min-h-screen bg-blue-100">
-      <Suspense fallback={<h1>Loading object</h1>}>
+      {gltf === null ? (
+        "Loading"
+      ) : (
         <Canvas
           style={{
             width: "100vw",
@@ -25,7 +40,10 @@ const Index = () => {
             snap={true}
             polar={[0, Math.PI / 8]}
           >
-            <primitive object={gltf.scene}></primitive>
+            {
+              // @ts-ignore
+              <primitive object={gltf.scene}></primitive>
+            }
           </PresentationControls>
           <Text
             scale={[3, 3, 3]}
@@ -37,7 +55,7 @@ const Index = () => {
             My First Blender Tree
           </Text>
         </Canvas>
-      </Suspense>
+      )}
     </div>
   )
 }

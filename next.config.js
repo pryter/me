@@ -16,7 +16,5 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   experimental: {
     concurrentFeatures: true,
-    serverComponents: true,
-    runtime: "nodejs",
   },
 })
