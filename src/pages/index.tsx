@@ -20,14 +20,14 @@ const Index = () => {
   }, [])
 
   return (
-    <div className="flex flex-col justify-center items-center pr-36 w-full min-h-screen bg-blue-100">
+    <div className="flex flex-col justify-center items-center pr-32 w-full min-h-screen bg-blue-100">
       {gltf === null ? (
         "Loading"
       ) : (
         <Canvas
           style={{
-            width: "100vw",
-            height: "100vh",
+            width: "130vw",
+            height: "180vw",
             maxHeight: "1000px",
           }}
           resize={{ offsetSize: true }}
