@@ -4,7 +4,7 @@ import { PresentationControls, useGLTF, Text } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 
 const Index = () => {
-  const gltf = useGLTF("http://localhost:3000/assets/models/myfirstTree.glb")
+  const gltf = useGLTF("https://pryter.me/assets/models/myfirstTree.glb")
 
   return (
     <div className="flex flex-col justify-center items-center pr-36 w-full min-h-screen bg-blue-100">
