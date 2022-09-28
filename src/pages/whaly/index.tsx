@@ -4,7 +4,7 @@ const Page = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
       <div className="text-xs fixed bottom-2 left-0 text-center w-full">
-        <a href="service" className="cursor-pointer text-gray-500">
+        <a target="_blank" href="service/proxy" className="cursor-pointer text-gray-500">
           Inspect service
         </a>
       </div>

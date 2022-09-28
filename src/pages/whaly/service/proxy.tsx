@@ -1,27 +1,37 @@
 import Head from "next/head"
 
-export async function getServerSideProps() {
-  const pageData = await fetch("http://192.168.1.47:3000/servers")
+import { useEffect, useState } from "react"
 
-  let data = `<div class="flex items-center justify-center w-full min-h-screen fixed"><h1 class="text-gray-700 text-lg">Access denied</h1></div>`
+const Page = () => {
+  const [data] = useState(
+    `<div class="flex items-center justify-center w-full min-h-screen fixed"><h1 class="text-gray-700 text-lg">Access denied</h1></div>`
+  )
 
-  if (pageData.status === 200) {
-    const blob = await pageData.blob()
-    data = await blob.text()
-    data =
-      data
-        .split("<body>")[1]
-        ?.split("</body>")[0]
-        ?.replace(`id="__next"`, "")
-        .split(`<script id="__NEXT_DATA__" type="application/json">`)[0] || ""
-  }
+  // const getRenderable = async () => {
+  //   const pageData = await fetch("http://192.168.1.47:3000/servers", {mode: "cors"})
 
-  return {
-    props: { data }, // will be passed to the page component as props
-  }
-}
+  //   console.log(pageData)
 
-const Page = ({ data }: any) => {
+  //   let data = `<div class="flex items-center justify-center w-full min-h-screen fixed"><h1 class="text-gray-700 text-lg">Access denied</h1></div>`
+
+  //   if (pageData.status === 200) {
+  //     const blob = await pageData.blob()
+  //     data = await blob.text()
+  //     data =
+  //       data
+  //         .split("<body>")[1]
+  //         ?.split("</body>")[0]
+  //         ?.replace(`id="__next"`, "")
+  //         .split(`<script id="__NEXT_DATA__" type="application/json">`)[0] || ""
+  //   }
+
+  //   setData(data)
+  // }
+
+  useEffect(() => {
+    window.location.href = "http://192.168.1.47:3000/servers"
+  }, [])
+
   return (
     <>
       <Head>
