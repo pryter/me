@@ -1,4 +1,4 @@
-import { useEffect, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import Head from "next/head"
 
@@ -38,7 +38,14 @@ const Page = () => {
         <title>Whaly Service Report Proxy</title>
       </Head>
       <div>
-        <h1 className="rounded-l-lg text-yellow-600 text-green-600 flex-grow space-y-6 px-3 truncate text-gray-600 text-gray-700 text-gray-800 mt-1 bg-yellow-100 bg-blue-100 space-y-6 mb-6 hidden py-1 px-2 bg-blue-50 font-medium">
+        <h1 className="hidden px-2">e</h1>
+        <h1 className="hidden text-green-600">e</h1>
+        <h1 className="hidden text-gray-600">e</h1>
+        <h1 className="hidden text-gray-700">e</h1>
+        <h1 className="hidden text-gray-800">e</h1>
+        <h1 className="hidden bg-blue-100">e</h1>
+        <h1 className="hidden bg-blue-50">e</h1>
+        <h1 className="rounded-l-lg text-yellow-600 flex-grow space-y-6 px-3 truncate mt-1 bg-yellow-100 space-y-6 mb-6 hidden py-1 font-medium">
           e
         </h1>
         <div dangerouslySetInnerHTML={{ __html: data }}></div>
