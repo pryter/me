@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/image"
 const Page = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
@@ -24,7 +24,7 @@ const Page = () => {
         <button
           onClick={() => {
             window.location.href =
-              "https://discord.com/oauth2/authorize?client_id=880000846828535818&permissions=277083450689&scope=bot%20applications.commands";
+              "https://discord.com/oauth2/authorize?client_id=880000846828535818&permissions=277083450689&scope=bot%20applications.commands"
           }}
           className="flex items-center space-x-2 pl-6 pr-5 py-2 bg-gradient-to-r from-orange-300 to-rose-300 text-gray-100 rounded-xl shadow-md bg-opacity-50 font-medium cursor-pointer"
         >
@@ -59,7 +59,7 @@ const Page = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

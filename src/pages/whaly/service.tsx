@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from "next/head"
 
 const Page = () => {
   return (
@@ -16,7 +16,7 @@ const Page = () => {
         ></iframe>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page
