@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-import { OrbitControls } from "@react-three/drei"
-import { Canvas, useFrame } from "@react-three/fiber"
-import Head from "next/head"
-import { MathUtils } from "three"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { OrbitControls } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import Head from "next/head";
+import { MathUtils } from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Scene = ({ gltf, title }: any) => {
   useFrame((state) => {
     if (!title) {
-      const { camera } = state
-      camera.zoom = MathUtils.lerp(camera.zoom, 0.6, 0.1)
-      camera.updateProjectionMatrix()
+      const { camera } = state;
+      camera.zoom = MathUtils.lerp(camera.zoom, 0.6, 0.1);
+      camera.updateProjectionMatrix();
     }
-  })
+  });
 
   return (
     <>
@@ -67,24 +67,24 @@ const Scene = ({ gltf, title }: any) => {
         />
       </>
     </>
-  )
-}
+  );
+};
 const Index = () => {
-  const [gltf, setObj] = useState<any>(null)
+  const [gltf, setObj] = useState<any>(null);
 
-  const [title, setTitle] = useState(true)
+  const [title, setTitle] = useState(true);
 
   useEffect(() => {
     const load = async () => {
-      const loader = new GLTFLoader()
+      const loader = new GLTFLoader();
       const ob = await loader.loadAsync(
         "https://pryter.me/assets/scenes/forest_scene_web.glb"
-      )
-      setObj(ob)
-    }
+      );
+      setObj(ob);
+    };
 
-    load()
-  }, [])
+    load();
+  }, []);
 
   return (
     <>
@@ -93,8 +93,8 @@ const Index = () => {
       </Head>
       <div className="flex fixed flex-col justify-center items-center w-full min-h-screen bg-gray-900">
         {[...Array(30)].map((_, i) => {
-          const top = Math.floor(Math.random() * 100)
-          const left = Math.floor(Math.random() * 100)
+          const top = Math.floor(Math.random() * 100);
+          const left = Math.floor(Math.random() * 100);
 
           return (
             <div
@@ -102,7 +102,7 @@ const Index = () => {
               style={{ top: `${top}vh`, left: `${left}vw` }}
               className="fixed w-1 h-1 bg-white"
             />
-          )
+          );
         })}
         {gltf === null ? (
           <h1 className="text-xl text-white animate-pulse">Loading..</h1>
@@ -128,7 +128,7 @@ const Index = () => {
       {title && (
         <div
           onClick={() => {
-            setTitle(false)
+            setTitle(false);
           }}
           className="flex fixed items-center w-full min-h-screen bg-gray-800 bg-opacity-20 backdrop-blur text-gray-50"
         >
@@ -153,7 +153,7 @@ const Index = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
