@@ -8,7 +8,7 @@ const Page = () => {
       </Head>
       <div>
         <iframe
-          src="http://192.168.1.47:3000/servers"
+          src="/whaly/service/proxy"
           frameBorder="0"
           width="100%"
           height="100%"
