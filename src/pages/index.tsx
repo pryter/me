@@ -130,9 +130,9 @@ const Index = () => {
           onClick={() => {
             setTitle(false)
           }}
-          className="flex fixed items-center w-full min-h-screen text-gray-50"
+          className="flex fixed items-center w-full min-h-screen bg-gray-800 bg-opacity-20 backdrop-blur text-gray-50"
         >
-          <div className="flex fixed top-0 justify-between items-center py-3 px-6 space-x-2 w-full bg-gray-500 bg-opacity-25 border border-white border-opacity-20 sm:space-x-0 md:px-10 blackdrop-blur-sm">
+          <div className="flex fixed top-0 justify-between items-center py-3 px-6 space-x-2 w-full backdrop-blur-xl bg-gray-600 bg-opacity-25 border border-white border-opacity-20 sm:space-x-0 md:px-10 blackdrop-blur-sm">
             <h1 className="font-semibold">Pryter</h1>
             <div className="flex items-center space-x-2">
               <span className="text-sm">Learning Blender: </span>
