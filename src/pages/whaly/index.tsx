@@ -2,12 +2,12 @@ import Image from "next/image"
 
 const Page = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
       <div className="text-xs fixed bottom-2 left-0 text-center w-full">
         <a
           target="_blank"
           href="service/proxy"
-          className="cursor-pointer text-gray-500"
+          className="cursor-pointer text-white"
         >
           Inspect service
         </a>
@@ -20,8 +20,8 @@ const Page = () => {
             className="relative rounded-full"
           />
         </div>
-        <h1 className="font-bold text-2xl text-black">Whaly</h1>
-        <p className="text-gray-600 bg-gray-100 px-4 rounded-lg">
+        <h1 className="font-bold text-2xl text-white">Whaly</h1>
+        <p className="text-gray-600 bg-white px-4 rounded-lg">
           A lonely ginger cat.
         </p>
       </div>
@@ -31,7 +31,7 @@ const Page = () => {
             window.location.href =
               "https://discord.com/oauth2/authorize?client_id=880000846828535818&permissions=277083450689&scope=bot%20applications.commands"
           }}
-          className="flex items-center space-x-2 pl-6 pr-5 py-2 bg-gradient-to-r from-orange-300 to-rose-300 text-gray-100 rounded-xl shadow-md bg-opacity-50 font-medium cursor-pointer"
+          className="flex items-center space-x-2 pl-6 pr-5 py-2 bg-gradient-to-r from-cyan-500 via-sky-600 to-gray-700 text-gray-100 rounded-xl shadow-md bg-opacity-50 font-medium cursor-pointer"
         >
           <span>Adopt one</span>
           <svg
@@ -49,7 +49,7 @@ const Page = () => {
             />
           </svg>
         </button>
-        <button className="flex items-center space-x-2 pl-5 pr-6 py-2 bg-gradient-to-r from-green-300 to-purple-400 text-gray-100 mt-3 rounded-xl shadow-md bg-opacity-50 font-medium cursor-pointer">
+        <button className="flex items-center space-x-2 pl-5 pr-6 py-2 bg-gradient-to-r from-teal-600 via-emerald-600 to-gray-700 text-gray-100 mt-3 rounded-xl shadow-md bg-opacity-50 font-medium cursor-pointer">
           <svg
             fill="#FFFFFF"
             xmlns="http://www.w3.org/2000/svg"
