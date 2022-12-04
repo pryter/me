@@ -29,7 +29,7 @@ const Page = () => {
   // }
 
   useEffect(() => {
-    window.location.href = "http://192.168.1.47:3000/servers"
+    window.location.href = "http://192.168.1.67:3000"
   }, [])
 
   return (
