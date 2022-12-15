@@ -172,15 +172,6 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
           </motion.div>
         </div>
       </div>
-      <div className="text-xs fixed bottom-2 left-0 text-center w-full">
-        <a
-          target="_blank"
-          href="service/proxy"
-          className="cursor-pointer text-white"
-        >
-          Inspect service
-        </a>
-      </div>
     </div>
   )
 }
