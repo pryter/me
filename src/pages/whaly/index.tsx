@@ -1,6 +1,18 @@
+import { useState } from "react"
+
+import { motion } from "framer-motion"
 import Image from "next/image"
+import Router from "next/router"
 
 const Page = () => {
+  const [exit, setExit] = useState(false)
+
+  const goToRanking = () => {
+    setExit(true)
+    setTimeout(() => {
+      Router.push("whaly/ranking")
+    }, 1000)
+  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
       <div className="text-xs fixed bottom-2 left-0 text-center w-full">
@@ -12,7 +24,11 @@ const Page = () => {
           Inspect service
         </a>
       </div>
-      <div className="flex flex-col items-center mb-4">
+      <motion.div
+        animate={exit && { y: -400, opacity: 0 }}
+        transition={{ type: "tween", duration: 0.8 }}
+        className="flex flex-col items-center mb-4"
+      >
         <div className="w-32 h-32 relative rounded-full shadow-md border-4">
           <Image
             layout="fill"
@@ -24,8 +40,36 @@ const Page = () => {
         <p className="text-gray-600 bg-white px-4 rounded-lg">
           A lonely ginger cat.
         </p>
-      </div>
-      <div className="flex flex-col items-center rounded-lg px-4 py-4">
+      </motion.div>
+      <motion.div
+        animate={exit && { y: -400, opacity: 0 }}
+        transition={{ type: "tween", delay: 0.2, duration: 0.8 }}
+        className="flex flex-col items-center rounded-lg px-4 py-4 relative"
+      >
+        <div
+          onClick={goToRanking}
+          className="flex flex-col items-center text-gray-100 absolute -bottom-24 animate-bounce cursor-pointer"
+        >
+          <span className="text-base animate-pulse">
+            What&apos;s everyone listening to?
+          </span>
+          <div className="animate-pulse">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.2}
+              stroke="currentColor"
+              className="w-5 h-5 animate-bounce"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </div>
+        </div>
         <button
           onClick={() => {
             window.location.href =
@@ -62,7 +106,7 @@ const Page = () => {
           </svg>
           <span>Visit our Discord Channel</span>
         </button>
-      </div>
+      </motion.div>
     </div>
   )
 }
