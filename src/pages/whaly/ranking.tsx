@@ -90,7 +90,7 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
       arr.push({ url: k, ...rank[k] })
     })
 
-    const sorted = arr.sort((a, b) => a.playCount - b.playCount)
+    const sorted = arr.sort((a, b) => b.playCount - a.playCount)
 
     const topFive = sorted.slice(0, 5)
     const leftOver = sorted.slice(5, sorted.length)
