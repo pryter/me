@@ -1,15 +1,17 @@
 import { FC, useEffect, useState } from "react"
+
 import { motion } from "framer-motion"
-import { GetServerSideProps, NextPage } from "next"
+import { GetStaticProps, NextPage } from "next"
 
 import { initialiseDB } from "@/libs/firebase-admin"
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const data = await initialiseDB().collection("indexed").doc("main").get()
   return {
     props: {
       data: data.data(),
     },
+    revalidate: 2 * 60,
   }
 }
 
