@@ -81,7 +81,7 @@ const Index = () => {
             type: "tween",
             duration: 1.5,
           }}
-          className="absolute top-0 left-0 z-10 w-full h-full border border-gray-900 backdrop-blur-[3px] "
+          className="absolute top-0 left-0 z-10 w-full h-full border border-gray-900 bg-white bg-opacity-0 backdrop-blur-[3px] "
         />
         <motion.div
           initial={{ opacity: 0 }}
