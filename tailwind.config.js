@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme")
+
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -14,7 +16,14 @@ module.exports = {
       "6xl": "4rem",
     },
     extend: {
+      fontFamily: {
+        display: ["Overpass Mono", ...defaultTheme.fontFamily.mono],
+      },
       colors: {
+        ink: {
+          700: "#0000ff",
+        },
+        carbon: "#033246",
         gray: {
           100: "#f7fafc",
           200: "#edf2f7",

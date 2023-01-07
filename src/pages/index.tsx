@@ -1,158 +1,90 @@
-import { useEffect, useState } from "react"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { FC, ReactNode } from "react"
+import Router from "next/router"
 
-import { OrbitControls } from "@react-three/drei"
-import { Canvas, useFrame } from "@react-three/fiber"
-import Head from "next/head"
-import { MathUtils } from "three"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-
-const Scene = ({ gltf, title }: any) => {
-  useFrame((state) => {
-    if (!title) {
-      const { camera } = state
-      camera.zoom = MathUtils.lerp(camera.zoom, 0.6, 0.1)
-      camera.updateProjectionMatrix()
-    }
-  })
-
+const SelfReveal: FC<{ children: ReactNode; delay?: number }> = ({
+  children,
+  delay = 0,
+}) => {
   return (
-    <>
-      <OrbitControls
-        enablePan={true}
-        enableZoom={true}
-        enableRotate={true}
-        target={title ? [-20, 1.5, -6] : [0, 0, 0]}
-      />
-
-      <>
-        {
-          // @ts-ignore
-          <primitive object={gltf.scene}></primitive>
-        }
-        <pointLight
-          position={[0, 10, 0]}
-          rotation={[0, 0, 45.2]}
-          power={4}
-          distance={30}
-          decay={1.6}
-          color={"#fff"}
-        />
-        <pointLight
-          position={[-4.9, 3.3067, 5.47324]}
-          rotation={[0, 0, 45.2]}
-          power={20}
-          distance={9}
-          decay={1.6}
-          color={"#FFED6D"}
-        />
-        <pointLight
-          position={[7.159, 3.3067, 4.0242]}
-          rotation={[0, 0, 211]}
-          power={20}
-          distance={9}
-          decay={1.6}
-          color={"#FFED6D"}
-        />
-        <rectAreaLight
-          position={[7.85, 20.7331, 13.469]}
-          rotation={[-57, -80.5, -46.7]}
-          power={2000}
-          color="#98BBD8"
-        />
-        <rectAreaLight
-          position={[-10.1477, 17.7331, -15.531]}
-          rotation={[-629, -19.8, -4.61]}
-          power={14000}
-          color="#98BBD8"
-        />
-      </>
-    </>
+    <motion.div
+      initial={{ clipPath: "inset(0 100% 0 0)" }}
+      animate={{ clipPath: "inset(0 0.1% 0 0)" }}
+      transition={{
+        type: "tween",
+        duration: 0.8,
+        delay: delay || 0,
+      }}
+    >
+      {children}
+    </motion.div>
   )
 }
 const Index = () => {
-  const [gltf, setObj] = useState<any>(null)
-
-  const [title, setTitle] = useState(true)
-
-  useEffect(() => {
-    const load = async () => {
-      const loader = new GLTFLoader()
-      const ob = await loader.loadAsync(
-        "https://pryter.me/assets/scenes/forest_scene_web.glb"
-      )
-      setObj(ob)
-    }
-
-    load()
-  }, [])
-
   return (
-    <>
-      <Head>
-        <title>Pryter</title>
-      </Head>
-      <div className="flex fixed flex-col justify-center items-center w-full min-h-screen bg-gray-900">
-        {[...Array(30)].map((_, i) => {
-          const top = Math.floor(Math.random() * 100)
-          const left = Math.floor(Math.random() * 100)
-
-          return (
-            <div
-              key={`start-${i}`}
-              style={{ top: `${top}vh`, left: `${left}vw` }}
-              className="fixed w-1 h-1 bg-white"
-            />
-          )
-        })}
-        {gltf === null ? (
-          <h1 className="text-xl text-white animate-pulse">Loading..</h1>
-        ) : (
-          <Canvas
-            style={{
-              width: "100vw",
-              height: "100vh",
-              maxHeight: "100vh",
-            }}
-            resize={{ offsetSize: true }}
-            dpr={[1, 2]}
-            camera={{
-              position: [10, 2, 6],
-              fov: 60,
-              zoom: 1.4,
-            }}
-          >
-            <Scene gltf={gltf} title={title} />
-          </Canvas>
-        )}
-      </div>
-      {title && (
-        <div
-          onClick={() => {
-            setTitle(false)
+    <div className="w-full min-h-screen relative font-display">
+      <div className="absolute w-full top-0 left-0 min-h-screen">
+        <motion.div
+          initial={{ clipPath: "inset(0 0 100% 0)" }}
+          animate={{ clipPath: "inset(0 0 0.1% 0)" }}
+          transition={{
+            type: "tween",
+            duration: 1.5,
           }}
-          className="flex fixed items-center w-full min-h-screen bg-gray-800 bg-opacity-20 backdrop-blur text-gray-50"
+          className="w-full h-full absolute top-0 left-0 backdrop-blur-[3px] z-10 border border-gray-900 "
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: "tween", duration: 0.4 }}
         >
-          <div className="flex fixed top-0 justify-between items-center py-3 px-6 space-x-2 w-full backdrop-blur-xl bg-gray-600 bg-opacity-25 border border-white border-opacity-20 sm:space-x-0 md:px-10 blackdrop-blur-sm">
-            <h1 className="font-semibold">Pryter</h1>
-            <div className="flex items-center space-x-2">
-              <span className="text-sm">Learning Blender: </span>
-              <div className="relative w-32 h-4 bg-white bg-opacity-90 rounded-md">
-                <div className="absolute w-16 h-4 bg-gray-600 bg-opacity-70 rounded-md border border-gray-700 animate-pulse" />
-              </div>
+          <Image
+            src={"/images/terrain.svg"}
+            layout={"fill"}
+            className="object-cover"
+          />
+        </motion.div>
+      </div>
+      <div className="flex flex-col text-gray-900 min-h-screen max-w-4xl mx-auto px-6 relative z-20">
+        <div className="flex items-center justify-between py-6">
+          <SelfReveal delay={1.4}>
+            <h1 className="font-bold text-xl">Pryter</h1>
+          </SelfReveal>
+          <SelfReveal delay={2}>
+            <div className="flex items-center space-x-6">
+              <h1
+                onClick={() => {
+                  Router.push("/about")
+                }}
+                className="cursor-pointer"
+              >
+                about me
+              </h1>
+              <h1
+                onClick={() => {
+                  Router.push("/projects")
+                }}
+                className="cursor-pointer"
+              >
+                projects
+              </h1>
+              <h1>socials</h1>
             </div>
-          </div>
-          <div className="flex relative flex-col justify-center items-center py-6 w-full  md:min-h-screen">
-            <h1 className="text-4xl font-medium">Hello there</h1>
-            <p className="text-lg font-medium">
-              Welcome to my personal website!
-            </p>
-            <div className="absolute py-2 px-4 mt-48 bg-gray-500 bg-opacity-25 rounded-lg border border-white border-opacity-30 backdrop-blur-sm animate-pulse cursor-pointer">
-              <span>Tap anywhere to look around..</span>
-            </div>
-          </div>
+          </SelfReveal>
         </div>
-      )}
-    </>
+        <div className="flex flex-col items-center justify-center my-auto">
+          <SelfReveal delay={0.8}>
+            <h1 className="text-3xl font-semibold">Hello there..</h1>
+          </SelfReveal>
+          <SelfReveal delay={1}>
+            <p className="text-center">
+              Welcome to my personal profile archive
+            </p>
+          </SelfReveal>
+        </div>
+      </div>
+    </div>
   )
 }
 
