@@ -19,6 +19,7 @@ const ProjectContainer: FC<{
 
       <a
         href={url}
+rel="noreferrer"
         target={"_blank"}
         className="flex shrink-0 items-center pr-4 pl-3 ml-3 h-full text-white hover:bg-gray-700 rounded-r-lg cursor-pointer"
         rel="noreferrer"
