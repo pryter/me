@@ -97,6 +97,7 @@ initial={{width: "24px", height: "24px", top: "26px", right: "0px", borderWidth:
       >
         <motion.div
           animate={animation}
+initial={{display: "none"}}
           transition={{ delay: showNav ? 0.25 : 0 }}
           className="px-8 mt-[80px] space-y-2"
         >
