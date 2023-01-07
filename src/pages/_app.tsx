@@ -12,6 +12,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         initial={{ clipPath: "inset(0 100% 0 0)" }}
         animate={{ clipPath: "inset(0 0.1% 0 0)" }}
         exit={{ clipPath: "inset(0 0.1% 0 100%)" }}
+        transition={{ duration: 0.2 }}
+        className={router.pathname !== "/" ? "overflow-y-auto" : ""}
       >
         <Component {...pageProps} />
       </motion.div>
