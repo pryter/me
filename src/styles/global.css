@@ -21,6 +21,16 @@ a:hover {
   @apply my-6;
 }
 
+.bg-blur {
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.bg-blur-sm {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
 .content ul {
   @apply my-6;
 }

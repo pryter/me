@@ -92,7 +92,7 @@ export const NavBar = () => {
       <motion.div
         animate={animation2}
         transition={{ delay: showNav ? 0 : 0.4 }}
-        className="absolute top-0 -right-6 z-[100] w-[200px] h-screen bg-white bg-opacity-20 rounded-l-lg border border-gray-700 backdrop-blur-sm"
+        className="absolute top-0 -right-6 z-[100] w-[200px] h-screen bg-white bg-opacity-20 rounded-l-lg border border-gray-700 bg-blur-sm"
       >
         <motion.div
           animate={animation}
