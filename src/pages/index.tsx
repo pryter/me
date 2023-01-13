@@ -118,7 +118,13 @@ const Index = () => {
               >
                 projects
               </h1>
-              <h1>socials</h1>
+              <h1
+                onClick={() => {
+                  Router.push("/socials")
+                }}
+              >
+                socials
+              </h1>
             </div>
           </SelfReveal>
           {showNav && (
@@ -131,8 +137,15 @@ const Index = () => {
           )}
           <motion.div
             animate={animation2}
+            initial={{
+              width: "24px",
+              height: "24px",
+              top: "26px",
+              right: "0px",
+              borderWidth: "0px",
+            }}
             transition={{ delay: showNav ? 0 : 0.4 }}
-            className="absolute top-0 -right-6 z-[100] w-[200px] h-screen bg-white bg-opacity-20 rounded-l-lg border border-gray-700 backdrop-blur-sm"
+            className="absolute top-0 -right-6 z-[100] w-[200px] h-screen bg-white bg-opacity-20 rounded-l-lg border border-gray-700 backdrop-blur-sm sm:hidden"
           >
             <motion.div
               animate={animation}
@@ -155,7 +168,14 @@ const Index = () => {
               >
                 Projects
               </h1>
-              <h1 className="font-bold text-right">Socials</h1>
+              <h1
+                onClick={() => {
+                  Router.push("/socials")
+                }}
+                className="font-bold text-right cursor-pointer"
+              >
+                Socials
+              </h1>
             </motion.div>
           </motion.div>
           <div className="flex z-[101] sm:hidden">
