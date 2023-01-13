@@ -148,6 +148,9 @@ const Index = () => {
             className="absolute top-0 -right-6 z-[100] w-[200px] h-screen bg-white bg-opacity-20 rounded-l-lg border border-gray-700 backdrop-blur-sm sm:hidden"
           >
             <motion.div
+              initial={{
+                display: "none",
+              }}
               animate={animation}
               transition={{ delay: showNav ? 0.25 : 0 }}
               className="px-8 mt-[80px] space-y-2"
