@@ -30,7 +30,7 @@ const RankingBar: FC<{
   const dif = index % 2 === 0
   return (
     <div className="flex space-x-2">
-      <h1 className="text-gray-100 font-semibold text-xl">{index}</h1>
+      <h1 className="text-xl font-semibold text-gray-100">{index}</h1>
       <motion.div
         initial={{ width: "0%" }}
         animate={{ width: `${progress}%` }}
@@ -45,11 +45,11 @@ const RankingBar: FC<{
           target="_blank"
           rel="noreferrer"
           href={url}
-          className="absolute sm:text-sm top-6 inline max-w-[70%] truncate text-white text-xs"
+          className="inline absolute top-6 max-w-[70%] text-xs text-white truncate sm:text-sm"
         >
           {title}
         </a>
-        <h1 className="text-sm sm:text-base text-gray-200">{count}</h1>
+        <h1 className="text-sm text-gray-200 sm:text-base">{count}</h1>
       </motion.div>
     </div>
   )
@@ -104,19 +104,19 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
     const date = new Date(data.time)
     const datString = `${zeroPad(date.getHours())}:${zeroPad(
       date.getMinutes()
-    )} ${month[date.getMonth()]} ${date.getFullYear()}`
+    )} ${month[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
     setDate(datString)
   }, [data])
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
       <div className="max-w-2xl">
-        <div className="w-screen px-8 sm:px-0 sm:w-full sm:max-w-lg">
+        <div className="px-8 w-screen sm:px-0 sm:w-full sm:max-w-lg">
           <motion.div
             transition={{ type: "tween", duration: 0.8 }}
             initial={{ y: 400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
-            <h1 className="text-2xl text-gray-100 font-medium">Ranking</h1>
+            <h1 className="text-2xl font-medium text-gray-100">Ranking</h1>
             <p className="text-gray-100">
               Anonymous most listening tracks across entire platform.
               <span className="text-sm sm:text-base">
@@ -125,7 +125,7 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
                 Last update: <span className="text-gray-400">{dateText}</span>
               </span>
             </p>
-            <p className="text-gray-500 sm:text-sm text-xs mb-8 sm:mb-10">
+            <p className="mb-8 text-xs text-gray-500 sm:mb-10 sm:text-sm">
               Note: We never store any detail about your server or your command
               usage.
             </p>
@@ -134,7 +134,7 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
             transition={{ type: "tween", duration: 0.8, delay: 0.2 }}
             initial={{ y: 400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="w-full flex flex-col space-y-5 sm:space-y-6"
+            className="flex flex-col space-y-5 w-full sm:space-y-6"
           >
             {topfive.map((i: any, k) => {
               return (
@@ -153,16 +153,16 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
             transition={{ type: "tween", duration: 0.8, delay: 0.4 }}
             initial={{ y: 400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="sm:w-full sm:max-w-lg bg-gray-700 mt-12 flex flex-col rounded-md h-48 sm:h-64 py-3 px-4 overflow-y-scroll space-y-1"
+            className="flex overflow-y-scroll flex-col py-3 px-4 mt-12 space-y-1 h-48 bg-gray-700 rounded-md sm:w-full sm:max-w-lg sm:h-64"
           >
             {other.map((i: any, k) => {
               return (
                 <div
                   key={`leftOver-${k}`}
-                  className="text-gray-200 flex items-center"
+                  className="flex items-center text-gray-200"
                 >
                   <h1 className="mr-2 text-lg text-gray-400">{k + 6}</h1>
-                  <a className="text-gray-400 break-all w-full truncate sm:text-base text-sm">
+                  <a className="w-full text-sm text-gray-400 truncate break-all sm:text-base">
                     {i.title}
                   </a>
                   <h1 className="ml-2 text-right">{i.playCount}</h1>
