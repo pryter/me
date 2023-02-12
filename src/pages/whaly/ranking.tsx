@@ -6,7 +6,7 @@ import { GetStaticProps, NextPage } from "next"
 import { initialiseDB } from "@/libs/firebase-admin"
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await initialiseDB().collection("indexed").doc("main").get()
+  const data = await initialiseDB().collection("indexed").doc("top50").get()
   return {
     props: {
       data: data.data(),
@@ -82,13 +82,9 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
   const [dateText, setDate] = useState("")
 
   useEffect(() => {
-    const arr: any[] = []
     if (!data) return
-    const rank = data.ranking
 
-    Object.keys(rank).forEach((k) => {
-      arr.push({ url: k, ...rank[k] })
-    })
+    const arr: any[] = data.ranking
 
     const sorted = arr.sort((a, b) => b.playCount - a.playCount)
 
