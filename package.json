@@ -22,10 +22,10 @@
     "firebase-admin": "^11.3.0",
     "framer-motion": "^7.10.0",
     "framer-motion-3d": "^6.2.8",
-    "next": "^12.1.0",
+    "next": "13",
     "next-seo": "^5.1.0",
-    "react": "^18.0.0-rc.2",
-    "react-dom": "^18.0.0-rc.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "three": "^0.138.3"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^16.1.0",
-    "eslint-config-next": "^12.1.0",
+    "eslint-config-next": "13",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
