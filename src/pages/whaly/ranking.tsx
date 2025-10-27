@@ -1,19 +1,8 @@
 import { FC, useEffect, useState } from "react"
 
+import { collection, getDoc, getFirestore, doc } from "firebase/firestore"
 import { motion } from "framer-motion"
-import { GetStaticProps, NextPage } from "next"
-
-import { initialiseDB } from "@/libs/firebase-admin"
-
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await initialiseDB().collection("indexed").doc("top50").get()
-  return {
-    props: {
-      data: data.data(),
-    },
-    revalidate: 2 * 60,
-  }
-}
+import { NextPage } from "next"
 
 const RankingBar: FC<{
   progress: number
@@ -23,9 +12,9 @@ const RankingBar: FC<{
   count: number
 }> = ({ progress, title, url, index, count }) => {
   const diffColor =
-    "flex justify-end bg-gradient-to-r rounded-r-sm from-green-200 via-green-400 to-purple-700 h-6 px-2 relative"
+    "flex justify-end bg-gradient-to-r rounded-md from-green-200 via-green-400 to-purple-700 h-6 px-2 relative"
   const defaultColor =
-    "flex justify-end bg-gradient-to-r rounded-r-sm from-fuchsia-500 via-red-600 to-orange-400 h-6 px-2 relative"
+    "flex justify-end bg-gradient-to-r rounded-md from-fuchsia-500 via-red-600 to-orange-400 h-6 px-2 relative"
 
   const dif = index % 2 === 0
   return (
@@ -45,7 +34,7 @@ const RankingBar: FC<{
           target="_blank"
           rel="noreferrer"
           href={url}
-          className="inline absolute top-6 max-w-[70%] text-xs text-white truncate sm:text-sm"
+          className="absolute top-6 inline max-w-[70%] truncate text-xs text-white"
         >
           {title}
         </a>
@@ -76,45 +65,73 @@ function zeroPad(input: number) {
   return num
 }
 
-const Page: NextPage<{ data: any }> = ({ data }) => {
+const Page: NextPage<{ data: any }> = () => {
   const [topfive, setTopfive] = useState<any[]>([])
   const [other, setOther] = useState<any[]>([])
   const [dateText, setDate] = useState("")
 
   useEffect(() => {
-    if (!data) return
+    ;(async function () {
+      const exp = localStorage.getItem("ranking-cache-expires")
+      const cache = localStorage.getItem("ranking-cache")
+      let data: any
+      // expired
+      if (!exp || parseInt(exp, 10) < new Date().getTime() || !cache) {
+        const firestore = getFirestore()
+        const col = collection(firestore, "indexed")
+        const docu = await getDoc(doc(col, "top50"))
+        data = docu.data()
 
-    const arr: any[] = data.ranking
+        localStorage.setItem("ranking-cache", JSON.stringify(data))
+        const currentt = new Date(data.time)
+        // next 30 min cache should expires
+        const hardLimit = currentt.getTime() + 4 * 60 * 60 * 1000
+        const min10 = new Date().getTime() + 10 * 60 * 1000
+        localStorage.setItem(
+          "ranking-cache-expires",
+          (min10 > hardLimit ? hardLimit : min10).toString(10)
+        )
+      } else {
+        // load cache
+        data = JSON.parse(cache)
+      }
 
-    const sorted = arr.sort((a, b) => b.playCount - a.playCount)
+      if (!data) return
 
-    const topFive = sorted.slice(0, 5)
-    const leftOver = sorted.slice(5, sorted.length)
+      const arr: any[] = data.ranking
 
-    topFive.forEach((i: any, k) => {
-      const highest = topFive[0].playCount
-      topFive[k].portion = (i.playCount / highest) * 100
-    })
-    setTopfive(topFive)
-    setOther(leftOver)
-    const date = new Date(data.time)
-    const datString = `${zeroPad(date.getHours())}:${zeroPad(
-      date.getMinutes()
-    )} ${month[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
-    setDate(datString)
-  }, [data])
+      const sorted = arr.sort((a, b) => b.playCount - a.playCount)
+
+      const topFive = sorted.slice(0, 5)
+      const leftOver = sorted.slice(5, sorted.length)
+
+      topFive.forEach((i: any, k) => {
+        const highest = topFive[0].playCount
+        topFive[k].portion = (i.playCount / highest) * 100
+      })
+      setTopfive(topFive)
+      setOther(leftOver)
+      const date = new Date(data.time)
+      const datString = `${zeroPad(date.getHours())}:${zeroPad(
+        date.getMinutes()
+      )} ${month[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
+      setDate(datString)
+    })()
+  }, [])
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
       <div className="max-w-2xl">
-        <div className="px-8 w-screen sm:px-0 sm:w-full sm:max-w-lg">
+        <div className="w-screen px-8 sm:w-full sm:max-w-lg sm:px-0">
           <motion.div
             transition={{ type: "tween", duration: 0.8 }}
             initial={{ y: 400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
-            <h1 className="text-2xl font-medium text-gray-100">Ranking</h1>
+            <h1 className="text-2xl font-semibold text-gray-100">
+              Anonymous Global Listening Trends
+            </h1>
             <p className="text-gray-100">
-              Anonymous most listening tracks across entire platform.
+              Top tracks ranked by total anonymous plays across the platform.
               <span className="text-sm sm:text-base">
                 <br className="sm:hidden" />
                 <br />
@@ -130,7 +147,7 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
             transition={{ type: "tween", duration: 0.8, delay: 0.2 }}
             initial={{ y: 400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="flex flex-col space-y-5 w-full sm:space-y-6"
+            className="flex w-full flex-col space-y-5 sm:space-y-6"
           >
             {topfive.map((i: any, k) => {
               return (
@@ -149,7 +166,7 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
             transition={{ type: "tween", duration: 0.8, delay: 0.4 }}
             initial={{ y: 400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="flex overflow-y-scroll flex-col py-3 px-4 mt-12 space-y-1 h-48 bg-gray-700 rounded-md sm:w-full sm:max-w-lg sm:h-64"
+            className="mt-12 flex h-48 flex-col space-y-2 overflow-y-scroll rounded-xl bg-gray-700 px-6 py-4 sm:h-64 sm:w-full sm:max-w-lg"
           >
             {other.map((i: any, k) => {
               return (
@@ -158,7 +175,7 @@ const Page: NextPage<{ data: any }> = ({ data }) => {
                   className="flex items-center text-gray-200"
                 >
                   <h1 className="mr-2 text-lg text-gray-400">{k + 6}</h1>
-                  <a className="w-full text-sm text-gray-400 truncate break-all sm:text-base">
+                  <a className="w-full truncate break-all text-sm text-gray-400 sm:text-base">
                     {i.title}
                   </a>
                   <h1 className="ml-2 text-right">{i.playCount}</h1>

@@ -13,9 +13,10 @@ const Page = () => {
       Router.push("whaly/ranking")
     }, 1000)
   }
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
-      <div className="text-xs fixed bottom-2 left-0 text-center w-full">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
+      <div className="fixed bottom-2 left-0 w-full text-center text-xs">
         <a
           target="_blank"
           href="service/proxy"
@@ -27,30 +28,30 @@ const Page = () => {
       <motion.div
         animate={exit && { y: -400, opacity: 0 }}
         transition={{ type: "tween", duration: 0.8 }}
-        className="flex flex-col items-center mb-4"
+        className="mb-4 flex flex-col items-center"
       >
-        <div className="w-32 h-32 relative rounded-full shadow-md border-4">
+        <div className="relative size-32 rounded-full border-4 shadow-md">
           <Image
             layout="fill"
             src="/assets/images/whaly.jpeg"
             className="relative rounded-full"
           />
         </div>
-        <h1 className="font-bold text-2xl text-white">Whaly</h1>
-        <p className="text-gray-600 bg-white px-4 rounded-lg">
+        <h1 className="text-2xl font-bold text-white">Whaly</h1>
+        <p className="rounded-lg bg-white px-4 text-gray-600">
           A lonely ginger cat.
         </p>
       </motion.div>
       <motion.div
         animate={exit && { y: -400, opacity: 0 }}
         transition={{ type: "tween", delay: 0.2, duration: 0.8 }}
-        className="flex flex-col items-center rounded-lg px-4 py-4 relative"
+        className="relative flex flex-col items-center rounded-lg p-4"
       >
         <div
           onClick={goToRanking}
-          className="flex flex-col items-center text-gray-100 absolute -bottom-24 animate-bounce cursor-pointer"
+          className="absolute -bottom-24 flex animate-bounce cursor-pointer flex-col items-center text-gray-100"
         >
-          <span className="text-base animate-pulse">
+          <span className="animate-pulse text-base">
             What&apos;s everyone listening to?
           </span>
           <div className="animate-pulse">
@@ -60,7 +61,7 @@ const Page = () => {
               viewBox="0 0 24 24"
               strokeWidth={2.2}
               stroke="currentColor"
-              className="w-5 h-5 animate-bounce"
+              className="size-5 animate-bounce"
             >
               <path
                 strokeLinecap="round"
@@ -70,21 +71,19 @@ const Page = () => {
             </svg>
           </div>
         </div>
-        <button
-          onClick={() => {
-            window.location.href =
-              "https://discord.com/oauth2/authorize?client_id=880000846828535818&permissions=277083450689&scope=bot%20applications.commands"
-          }}
-          className="flex items-center space-x-2 pl-6 pr-5 py-2 bg-gradient-to-r from-cyan-500 via-sky-600 to-gray-700 text-gray-100 rounded-xl shadow-md bg-opacity-50 font-medium cursor-pointer"
+        <a
+          href="https://discord.com/oauth2/authorize?client_id=880000846828535818&permissions=277083450689&scope=bot%20applications.commands"
+          target="_blank"
+          className="flex w-full cursor-pointer items-center justify-center space-x-2 rounded-xl bg-opacity-50 bg-gradient-to-r from-cyan-500 via-sky-600 to-gray-700 px-5 py-3 font-medium text-gray-100 shadow-md"
+          rel="noreferrer"
         >
-          <span>Adopt one</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
+            strokeWidth={1.8}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="size-6"
           >
             <path
               strokeLinecap="round"
@@ -92,8 +91,9 @@ const Page = () => {
               d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
             />
           </svg>
-        </button>
-        <button className="flex items-center space-x-2 pl-5 pr-6 py-2 bg-gradient-to-r from-teal-600 via-emerald-600 to-gray-700 text-gray-100 mt-3 rounded-xl shadow-md bg-opacity-50 font-medium cursor-pointer">
+          <span>Adopt one now !</span>
+        </a>
+        <button className="mt-3 flex cursor-pointer items-center space-x-2 rounded-xl bg-opacity-50 bg-gradient-to-r from-teal-600 via-emerald-600 to-gray-700 py-2 pl-5 pr-6 font-medium text-gray-100 shadow-md">
           <svg
             fill="#FFFFFF"
             xmlns="http://www.w3.org/2000/svg"
