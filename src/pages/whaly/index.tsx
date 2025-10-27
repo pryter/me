@@ -54,8 +54,8 @@ const Page = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              width="20"
-              height="20"
+              width="20px"
+              height="20px"
               strokeWidth={2.2}
               stroke="currentColor"
               className="size-5 animate-bounce"
@@ -77,6 +77,8 @@ const Page = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
+            width="24px"
+            height="24px"
             viewBox="0 0 24 24"
             strokeWidth={1.8}
             stroke="currentColor"
