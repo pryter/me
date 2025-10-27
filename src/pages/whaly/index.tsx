@@ -23,6 +23,7 @@ const Page = () => {
       >
         <div className="relative size-32 rounded-full border-4 shadow-md">
           <Image
+            alt={"profile"}
             layout="fill"
             src="/assets/images/whaly.jpeg"
             className="relative rounded-full"

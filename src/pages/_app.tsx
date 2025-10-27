@@ -19,7 +19,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   initializeApp(firebaseConfig)
 
   return (
-    <AnimatePresence exitBeforeEnter={true}>
+    <AnimatePresence mode={"wait"}>
       <motion.div
         key={router.pathname}
         initial={{ clipPath: "inset(0 100% 0 0)" }}
