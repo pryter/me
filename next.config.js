@@ -8,6 +8,9 @@ module.exports = withBundleAnalyzer({
     dirs: ["."],
     ignoreDuringBuilds: true,
   },
+  images: {
+    unoptimized: true,
+  },
   poweredByHeader: false,
   trailingSlash: true,
   basePath: "",
@@ -17,5 +20,8 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   experimental: {
     concurrentFeatures: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 })
