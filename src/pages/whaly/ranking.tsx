@@ -119,7 +119,7 @@ const Page: NextPage<{ data: any }> = () => {
     })()
   }, [])
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900 font-display">
       <div className="max-w-2xl">
         <div className="w-screen px-8 sm:w-full sm:max-w-lg sm:px-0">
           <motion.div
@@ -127,7 +127,7 @@ const Page: NextPage<{ data: any }> = () => {
             initial={{ y: 400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
-            <h1 className="text-2xl font-semibold text-gray-100">
+            <h1 className="text-2xl font-bold text-gray-100">
               Anonymous Global Listening Trends
             </h1>
             <p className="text-gray-100">

@@ -15,18 +15,9 @@ const Page = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900">
-      <div className="fixed bottom-2 left-0 w-full text-center text-xs">
-        <a
-          target="_blank"
-          href="service/proxy"
-          className="cursor-pointer text-white"
-        >
-          Inspect service
-        </a>
-      </div>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900 font-display">
       <motion.div
-        animate={exit && { y: -400, opacity: 0 }}
+        animate={exit ? { y: -400, opacity: 0 } : { y: 0, opacity: 1 }}
         transition={{ type: "tween", duration: 0.8 }}
         className="mb-4 flex flex-col items-center"
       >

@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        display: ["Overpass Mono", ...defaultTheme.fontFamily.mono],
+        display: ["Nunito", "Noto Sans Thai", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         ink: {
