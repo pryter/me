@@ -21,7 +21,10 @@ const Page = () => {
         transition={{ type: "tween", duration: 0.8 }}
         className="mb-4 flex flex-col items-center"
       >
-        <div className="relative size-32 rounded-full border-4 shadow-md">
+        <div
+          style={{ width: "128px", height: "128px" }}
+          className="relative rounded-full border-4 shadow-md"
+        >
           <Image
             alt={"profile"}
             layout="fill"
